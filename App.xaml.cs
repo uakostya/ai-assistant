@@ -18,13 +18,11 @@ namespace AiAssistant
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // Initialize services
             _settingsService = new SettingsService();
             _settings = _settingsService.LoadSettings();
             _clipboardService = new ClipboardService();
             _hotkeyService = new GlobalHotkeyService();
 
-            // Create system tray icon using embedded icon resource
             _trayIcon = new TaskbarIcon
             {
                 IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/icon.ico")),
@@ -34,11 +32,9 @@ namespace AiAssistant
 
             _trayIcon.TrayMouseDoubleClick += (s, args) => ShowSettings();
 
-            // Set main window to invisible
             MainWindow = new MainWindow();
             MainWindow.Visibility = Visibility.Hidden;
 
-            // Register global hotkey
             var handle = new System.Windows.Interop.WindowInteropHelper(MainWindow).EnsureHandle();
             if (!_hotkeyService.Register(handle))
             {
@@ -47,10 +43,8 @@ namespace AiAssistant
 
             _hotkeyService.HotkeyPressed += OnHotkeyPressed;
 
-            // Add hook for hotkey messages
             System.Windows.Interop.HwndSource.FromHwnd(handle)?.AddHook(HwndHook);
 
-            // Show welcome message if no settings
             if (string.IsNullOrWhiteSpace(_settings.OpenAIApiKey) &&
                 string.IsNullOrWhiteSpace(_settings.AzureApiKey))
             {
@@ -85,7 +79,6 @@ namespace AiAssistant
                 if (_settings == null || _settingsService == null || _clipboardService == null)
                     return;
 
-                // Get selected text
                 var selectedText = await _clipboardService.GetSelectedTextAsync();
 
                 if (string.IsNullOrWhiteSpace(selectedText))
@@ -95,19 +88,16 @@ namespace AiAssistant
                     return;
                 }
 
-                // Show processing window
                 var processingWindow = new ProcessingWindow();
                 processingWindow.Show();
 
                 try
                 {
-                    // Process text with AI
                     var aiService = new AiService(_settings);
                     var polishedText = await aiService.PolishTextAsync(selectedText);
 
                     processingWindow.UpdateStatus("Replacing text...");
 
-                    // Replace selected text
                     await _clipboardService.ReplaceSelectedTextAsync(polishedText);
 
                     processingWindow.Close();

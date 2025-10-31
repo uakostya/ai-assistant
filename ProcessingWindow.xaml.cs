@@ -5,13 +5,13 @@ namespace AiAssistant
     public partial class ProcessingWindow : Window
     {
         public ProcessingWindow()
-      {
-  InitializeComponent();
+        {
+            InitializeComponent();
         }
 
-  public void UpdateStatus(string status)
+        public void UpdateStatus(string status)
         {
-     StatusTextBlock.Text = status;
-  }
+            StatusTextBlock.Text = status;
+        }
     }
 }

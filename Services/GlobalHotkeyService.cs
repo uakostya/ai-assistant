@@ -1,9 +1,8 @@
 using System.Runtime.InteropServices;
-using System.Windows.Input;
 
 namespace AiAssistant.Services
 {
-    public class GlobalHotkeyService : IDisposable
+    public sealed class GlobalHotkeyService : IDisposable
     {
         [DllImport("user32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
@@ -42,9 +41,6 @@ namespace AiAssistant.Services
             HotkeyPressed?.Invoke(this, EventArgs.Empty);
         }
 
-        public void Dispose()
-        {
-            Unregister();
-        }
+        public void Dispose() => Unregister();
     }
 }

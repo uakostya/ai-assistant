@@ -2,6 +2,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using AiAssistant.Models;
 
 namespace AiAssistant.Services
@@ -15,6 +16,12 @@ namespace AiAssistant.Services
         );
 
         private static readonly byte[] Entropy = Encoding.UTF8.GetBytes("AiAssistant-Entropy-2024");
+
+        private static readonly JsonSerializerOptions JsonOptions = new()
+        {
+            WriteIndented = true,
+            Converters = { new JsonStringEnumConverter() },
+        };
 
         public AppSettings LoadSettings()
         {
@@ -32,7 +39,8 @@ namespace AiAssistant.Services
                     DataProtectionScope.CurrentUser
                 );
                 var json = Encoding.UTF8.GetString(decryptedData);
-                return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
+                return JsonSerializer.Deserialize<AppSettings>(json, JsonOptions)
+                    ?? new AppSettings();
             }
             catch
             {
@@ -50,10 +58,7 @@ namespace AiAssistant.Services
                     Directory.CreateDirectory(directory);
                 }
 
-                var json = JsonSerializer.Serialize(
-                    settings,
-                    new JsonSerializerOptions { WriteIndented = true }
-                );
+                var json = JsonSerializer.Serialize(settings, JsonOptions);
                 var dataToEncrypt = Encoding.UTF8.GetBytes(json);
                 var encryptedData = ProtectedData.Protect(
                     dataToEncrypt,

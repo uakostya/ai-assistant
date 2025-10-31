@@ -1,4 +1,5 @@
 using AiAssistant.Models;
+using AiAssistant.Models.Enums;
 using Azure;
 using Azure.AI.OpenAI;
 using OpenAI.Chat;
@@ -19,11 +20,13 @@ namespace AiAssistant.Services
             try
             {
                 if (string.IsNullOrWhiteSpace(text))
+                {
                     return text;
+                }
 
                 ChatClient client;
 
-                if (_settings.ApiProvider == "Azure")
+                if (_settings.ApiProvider == ApiProvider.Azure)
                 {
                     if (
                         string.IsNullOrWhiteSpace(_settings.AzureEndpoint)
