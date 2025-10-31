@@ -49,6 +49,7 @@ namespace AiAssistant.Services
                 }
 
                 SendCtrlC();
+                await Task.Delay(300);
 
                 var selectedText = string.Empty;
                 if (Clipboard.ContainsText())
@@ -114,7 +115,11 @@ namespace AiAssistant.Services
                     Clipboard.SetText(newText);
                 });
 
+                await Task.Delay(100);
+
                 SendCtrlV();
+
+                await Task.Delay(100);
             }
             catch (Exception ex)
             {
