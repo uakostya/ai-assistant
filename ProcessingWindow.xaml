@@ -1,41 +1,41 @@
 <Window x:Class="AiAssistant.ProcessingWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
- xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Processing" 
-   Height="200" 
-   Width="400"
-        WindowStartupLocation="CenterScreen"
-  WindowStyle="None"
-   AllowsTransparency="True"
+        Height="200" 
+        Width="400"
+        WindowStartupLocation="Manual"
+        WindowStyle="None"
+        AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
         Topmost="True">
     <Border Background="White" 
-      CornerRadius="10" 
-       BorderBrush="#2196F3" 
-      BorderThickness="2"
-  Padding="30">
+   CornerRadius="10" 
+          BorderBrush="#2196F3" 
+    BorderThickness="2"
+       Padding="30">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="AI Assistant" 
-          FontSize="24" 
-      FontWeight="Bold" 
-            HorizontalAlignment="Center"
-         Foreground="#2196F3"
-Margin="0,0,0,20"/>
-
-            <ProgressBar IsIndeterminate="True" 
-     Height="8" 
-       Width="300" 
-      Margin="0,0,0,15"/>
-
-            <TextBlock x:Name="StatusTextBlock"
-      Text="Processing your text..." 
-FontSize="14" 
+     <TextBlock Text="AI Assistant" 
+      FontSize="24" 
+              FontWeight="Bold" 
       HorizontalAlignment="Center"
-       Foreground="#666"/>
-        </StackPanel>
+            Foreground="#2196F3"
+    Margin="0,0,0,20"/>
+
+   <ProgressBar IsIndeterminate="True" 
+  Height="8" 
+       Width="300" 
+   Margin="0,0,0,15"/>
+
+    <TextBlock x:Name="StatusTextBlock"
+Text="Processing your text..." 
+          FontSize="14" 
+             HorizontalAlignment="Center"
+           Foreground="#666"/>
+      </StackPanel>
     </Border>
 </Window>
