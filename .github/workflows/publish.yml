@@ -3,31 +3,41 @@ name: Publish AiAssistant
 on:
   push:
     tags:
-    - 'v*.*.*'
+      - "v*.*.*"
   workflow_dispatch:
 
 jobs:
   publish:
     runs-on: windows-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '9.0.x'
-    
-    - name: Restore dependencies
-      run: dotnet restore AiAssistant.csproj
-    
-    - name: Publish application
-      run: dotnet publish AiAssistant.csproj -c Release -f net9.0-windows --no-restore -o ./publish
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: AiAssistant
-        path: ./publish/*
-        retention-days: 30
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore AiAssistant.csproj
+
+      - name: Publish application
+        run: dotnet publish AiAssistant.csproj -c Release -f net9.0-windows --no-restore -o ./publish
+
+      - name: Create zip archive
+        run: Compress-Archive -Path ./publish/* -DestinationPath ./AiAssistant-win-x64.zip
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          file: ./AiAssistant-win-x64.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+    # - name: Upload artifact
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: AiAssistant
+    #     path: ./publish/*
+    #     retention-days: 30
