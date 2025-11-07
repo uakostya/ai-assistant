@@ -26,7 +26,7 @@ jobs:
       run: dotnet publish AiAssistant.csproj -c Release -f net9.0-windows --no-restore -o ./publish
     
     - name: Create zip archive
-      run: Compress-Archive -Path ./publish/* -DestinationPath AiAssistant-Release.zip
+      run: Compress-Archive -Path ./publish/* -DestinationPath AiAssistant.zip
       shell: pwsh
     
     - name: Upload artifact
