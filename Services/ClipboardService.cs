@@ -27,7 +27,22 @@ namespace AiAssistant.Services
 
         private IntPtr _lastForegroundWindow;
 
+        private const int RetryCount = 3;
+
         public async Task<string> GetSelectedTextAsync()
+        {
+            for (int attempt = 0; attempt < RetryCount - 1; attempt++)
+            {
+                var selectedText = await GetSelectedTextInternalAsync();
+                if (!string.IsNullOrEmpty(selectedText))
+                {
+                    return selectedText;
+                }
+            }
+            return string.Empty;
+        }
+
+        private async Task<string> GetSelectedTextInternalAsync()
         {
             try
             {
