@@ -57,7 +57,9 @@ namespace AiAssistant.Services
                 var messages = new List<ChatMessage>
                 {
                     new SystemChatMessage(
-                        "You are a helpful assistant that checks grammar and polishes text. Return only the polished text without any explanations or additional comments."
+                        "You are a helpful assistant that checks grammar and polishes text. " +
+                        "Try to maintain the original level of formality. Don’t be unnecessarily formal, as it might sound rude. " +
+                        "Return only the polished text without any explanations or additional comments."
                     ),
                     new UserChatMessage($"Check grammar and polish: {text}"),
                 };
