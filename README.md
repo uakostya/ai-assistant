@@ -12,7 +12,7 @@ A Windows WPF application that provides AI-powered text polishing using OpenAI o
 ## Requirements
 
 - Windows OS
-- .NET 9.0
+- .NET 8.0
 - OpenAI API key OR Azure OpenAI service credentials
 
 ## Setup

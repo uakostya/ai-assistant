@@ -55,4 +55,3 @@ nunit-*.xml
 /.vs
 /AiAssistant.csproj.user
 /Properties/PublishProfiles/FolderProfile.pubxml.user
-/Properties/PublishProfiles/FolderProfile.pubxml
