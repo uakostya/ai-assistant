@@ -74,6 +74,11 @@ namespace AiAssistant
 
         private async void OnHotkeyPressed(object? sender, EventArgs e)
         {
+            var processingWindow = new ProcessingWindow();
+            processingWindow.ShowActivated = false;
+            processingWindow.Topmost = true;
+            processingWindow.Show();
+
             try
             {
                 if (_settings == null || _settingsService == null || _clipboardService == null)
@@ -88,9 +93,6 @@ namespace AiAssistant
                     return;
                 }
 
-                var processingWindow = new ProcessingWindow();
-                processingWindow.Show();
-
                 try
                 {
                     var aiService = new AiService(_settings);
@@ -99,12 +101,9 @@ namespace AiAssistant
                     processingWindow.UpdateStatus("Replacing text...");
 
                     await _clipboardService.ReplaceSelectedTextAsync(polishedText);
-
-                    processingWindow.Close();
                 }
                 catch (Exception ex)
                 {
-                    processingWindow.Close();
                     MessageBox.Show($"Error processing text: {ex.Message}\n\nPlease check your API settings.",
                         "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -112,6 +111,10 @@ namespace AiAssistant
             catch (Exception ex)
             {
                 MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                processingWindow.Close();
             }
         }
 
