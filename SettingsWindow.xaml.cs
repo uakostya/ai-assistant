@@ -45,6 +45,9 @@ namespace AiAssistant
             }
             DeploymentNameTextBox.Text = _settings.DeploymentName;
 
+            SystemMessageTextBox.Text = _settings.SystemChatMessage;
+            UserMessageTextBox.Text = _settings.UserChatMessage;
+
             UpdateVisibility();
         }
 
@@ -80,6 +83,8 @@ namespace AiAssistant
                 _settings.AzureEndpoint = AzureEndpointTextBox.Text;
                 _settings.AzureApiKey = AzureApiKeyBox.Password;
                 _settings.DeploymentName = DeploymentNameTextBox.Text;
+                _settings.SystemChatMessage = SystemMessageTextBox.Text;
+                _settings.UserChatMessage = UserMessageTextBox.Text;
 
                 _settingsService.SaveSettings(_settings);
                 MessageBox.Show(

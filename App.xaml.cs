@@ -26,7 +26,7 @@ namespace AiAssistant
             _trayIcon = new TaskbarIcon
             {
                 IconSource = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/icon.ico")),
-                ToolTipText = "AI Assistant - Press Ctrl+Win+A to polish text",
+                ToolTipText = "AI Assistant - Press Ctrl+Win+A to process text",
                 ContextMenu = (System.Windows.Controls.ContextMenu)FindResource("TrayContextMenu")
             };
 
@@ -96,11 +96,11 @@ namespace AiAssistant
                 try
                 {
                     var aiService = new AiService(_settings);
-                    var polishedText = await aiService.PolishTextAsync(selectedText);
+                    var processedText = await aiService.ProcessTextAsync(selectedText);
 
                     processingWindow.UpdateStatus("Replacing text...");
 
-                    await _clipboardService.ReplaceSelectedTextAsync(polishedText);
+                    await _clipboardService.ReplaceSelectedTextAsync(processedText);
                 }
                 catch (Exception ex)
                 {

@@ -70,6 +70,32 @@ Foreground="Gray"/>
                     </StackPanel>
                 </GroupBox>
 
+                <!-- Prompt Settings -->
+                <GroupBox Header="AI Prompt Settings" Padding="10" Margin="0,0,0,15">
+                    <StackPanel>
+                        <TextBlock Text="System Message:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                        <TextBox x:Name="SystemMessageTextBox" 
+                                 TextWrapping="Wrap" 
+                                 AcceptsReturn="True" 
+                                 Height="80" 
+                                 VerticalScrollBarVisibility="Auto"
+                                 Margin="0,0,0,5"/>
+                        <TextBlock Text="(Instructions for the AI assistant's behavior and output format)" 
+                                   FontSize="11" 
+                                   Foreground="Gray" 
+                                   Margin="0,0,0,10"/>
+
+                        <TextBlock Text="User Message Template:" FontWeight="SemiBold" Margin="0,0,0,5"/>
+                        <TextBox x:Name="UserMessageTextBox" 
+                                 TextWrapping="Wrap"
+                                 Margin="0,0,0,5"/>
+                        <TextBlock Text="(Use {0} as placeholder for the selected text)" 
+                                   FontSize="11" 
+                                   Foreground="Gray" 
+                                   Margin="0,0,0,10"/>
+                    </StackPanel>
+                </GroupBox>
+
                 <!-- Instructions -->
                 <Border Background="#E3F2FD" 
         BorderBrush="#2196F3" 
@@ -80,7 +106,7 @@ Foreground="Gray"/>
                     <StackPanel>
                         <TextBlock Text="Usage Instructions:" FontWeight="Bold" Margin="0,0,0,5"/>
                         <TextBlock TextWrapping="Wrap">
-    - Press Ctrl + Win + A while text is selected to polish it
+    - Press Ctrl + Win + A while text is selected to process it
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
 - The application runs in the system tray

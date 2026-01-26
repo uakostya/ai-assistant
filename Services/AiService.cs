@@ -15,7 +15,7 @@ namespace AiAssistant.Services
             _settings = settings;
         }
 
-        public async Task<string> PolishTextAsync(string text)
+        public async Task<string> ProcessTextAsync(string text)
         {
             try
             {
@@ -56,12 +56,8 @@ namespace AiAssistant.Services
 
                 var messages = new List<ChatMessage>
                 {
-                    new SystemChatMessage(
-                        "You are a helpful assistant that checks grammar and polishes text. " +
-                        "Try to maintain the original level of formality. Don’t be unnecessarily formal, as it might sound rude. " +
-                        "Return only the polished text without any explanations or additional comments."
-                    ),
-                    new UserChatMessage($"Check grammar and polish: {text}"),
+                    new SystemChatMessage(_settings.SystemChatMessage),
+                    new UserChatMessage(string.Format(_settings.UserChatMessage, text)),
                 };
 
                 var response = await client.CompleteChatAsync(messages);
@@ -74,3 +70,4 @@ namespace AiAssistant.Services
         }
     }
 }
+
