@@ -74,9 +74,11 @@ namespace AiAssistant
 
         private async void OnHotkeyPressed(object? sender, EventArgs e)
         {
-            var processingWindow = new ProcessingWindow();
-            processingWindow.ShowActivated = false;
-            processingWindow.Topmost = true;
+            var processingWindow = new ProcessingWindow
+            {
+                ShowActivated = false,
+                Topmost = true
+            };
             processingWindow.Show();
 
             try
