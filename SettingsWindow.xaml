@@ -106,13 +106,16 @@ Foreground="Gray"/>
                     <StackPanel>
                         <TextBlock Text="Usage Instructions:" FontWeight="Bold" Margin="0,0,0,5"/>
                         <TextBlock TextWrapping="Wrap">
-    - Press Ctrl + Win + A while text is selected to process it
+                            - Press Ctrl + Win + A while text is selected to process it.
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
-- The application runs in the system tray
+                            - A processing window will appear at the bottom right corner of your screen.
                         </TextBlock>
                         <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
-     - Right-click the tray icon for options
+                            - The selected text will be replaced with the AI-generated response.
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,0">
+                            - To revert changes, use Ctrl + Z immediately after processing.
                         </TextBlock>
                     </StackPanel>
                 </Border>
